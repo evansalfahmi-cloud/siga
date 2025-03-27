@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -23,15 +22,11 @@ class AuthController extends Controller
 
         $user = User::where('username', $request->username)->first();
 
-        if ($user && Hash::check($request->password, $user->password)) {
+        if ($user && $request->password === $user->password) { // Tidak menggunakan Hash::check
             Auth::login($user);
 
-            // Redirect berdasarkan peran pengguna
-            if ($user->role === 'tendik') {
-                return redirect()->route('tendik.dashboard');
-            } else {
-                return redirect()->route('siswa.dashboard');
-            }
+            // Redirect ke halaman dashboard tanpa membedakan peran
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors(['loginError' => 'Username atau password salah']);
