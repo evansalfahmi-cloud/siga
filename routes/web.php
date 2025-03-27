@@ -1,17 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-
+// Rute login & logout
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Rute untuk dashboard setelah login
-Route::get('/dashboard/tendik', function () {
-    return 'Selamat datang, Tendik!';
-})->name('tendik.dashboard')->middleware('auth');
+// Rute dashboard (hanya untuk pengguna yang login)
+Route::middleware([\App\Http\Middleware\AuthMiddleware::class])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/dashboard/siswa', function () {
-    return 'Selamat datang, Siswa!';
-})->name('siswa.dashboard')->middleware('auth');
+    // Rute menambah data hanya bisa diakses oleh tendik
+    Route::post('/dashboard/tambah', [DashboardController::class, 'store'])
+        ->name('dashboard.store')
+        ->middleware('tendik'); // Middleware untuk membatasi akses hanya ke tendik
+});
