@@ -35,17 +35,21 @@
     @if(auth()->user()->role === 'tendik')
         <h3 class="mt-4">Tambah Materi</h3>
         <form action="{{ route('dashboard.store') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <label class="form-label">Judul</label>
-                <input type="text" name="judul_materi" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Deskripsi</label>
-                <textarea name="deskripsi" class="form-control" rows="3" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Tambah</button>
-        </form>
+    @csrf
+    <div class="mb-3">
+        <label class="form-label">Judul Materi</label>
+        <input type="text" name="judul_materi" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Mata Pelajaran</label>
+        <input type="text" name="mata_pelajaran" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Deskripsi</label>
+        <textarea name="deskripsi" class="form-control" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Tambah</button>
+    </form>
     @endif
 
     <!-- Logout -->
