@@ -7,11 +7,11 @@
     @vite(['resources/js/app.js'])
     @vite(['resources/css/app.css'])
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+<body class="d-flex flex-column justify-content-center align-items-center vh-100 bg-light font-sans">
 
-    <div class="text-center mb-4">
-        <h2 class="text-primary">Selamat Datang di S1GA Project</h2>
-        <p>Silahkan Login terlebih dahulu</p>
+    <div class="text-center mb-5 w-100">
+        <h3 class="fw-bold text-success">Selamat Datang di S1GA Project</h3>
+        <p class="fs-5 text-success">Silahkan Login terlebih dahulu:</p>
     </div>
 
     <div class="card p-4 shadow-lg" style="width: 350px;">
@@ -29,9 +29,11 @@
             @if ($errors->has('loginError'))
                 <div class="alert alert-danger">{{ $errors->first('loginError') }}</div>
             @endif
-            <button type="submit" class="btn btn-primary w-100">Login</button>
+            <button type="submit" class="btn btn-success w-100">Login</button>
         </form>
     </div>
 
 </body>
+
+
 </html>
