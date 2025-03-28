@@ -17,12 +17,12 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required',
+            'judul_materi' => 'required',
             'deskripsi' => 'required'
         ]);
 
         Materi::create([
-            'judul' => $request->judul,
+            'judul_materi' => $request->judul_materi, // ✅ Sesuai dengan input form
             'deskripsi' => $request->deskripsi
         ]);
 

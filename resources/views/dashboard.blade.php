@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
     @vite(['resources/js/app.js'])
+    @vite(['resources/css/app.css'])
 </head>
 <body class="container mt-5">
     <h1 class="text-primary">Dashboard</h1>
@@ -23,12 +22,13 @@
     <!-- Daftar Materi -->
     <h3 class="mt-4">Daftar Materi</h3>
     <ul class="list-group">
-        @foreach($materi as $item)
-            <li class="list-group-item">
-                <strong>{{ $item->judul }}</strong><br>
-                {{ $item->deskripsi }}
-            </li>
-        @endforeach
+    @foreach($materi as $item)
+    <li class="list-group-item">
+        <strong>{{ $item->judul_materi }}</strong><br> <!-- ✅ Perbaikan -->
+        {{ $item->deskripsi }}
+    </li>
+    @endforeach
+
     </ul>
 
     <!-- Form Tambah Materi (Hanya untuk Tendik) -->
@@ -38,7 +38,7 @@
             @csrf
             <div class="mb-3">
                 <label class="form-label">Judul</label>
-                <input type="text" name="judul" class="form-control" required>
+                <input type="text" name="judul_materi" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Deskripsi</label>

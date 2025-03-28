@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
     @vite(['resources/js/app.js'])
+    @vite(['resources/css/app.css'])
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light" class="font-sans">
 
     <div class="card p-4 shadow-lg" style="width: 350px;">
         <h4 class="text-center mb-3">Login</h4>
