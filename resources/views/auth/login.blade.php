@@ -7,7 +7,12 @@
     @vite(['resources/js/app.js'])
     @vite(['resources/css/app.css'])
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light" class="font-sans">
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+
+    <div class="text-center mb-4">
+        <h2 class="text-primary">Selamat Datang di S1GA Project</h2>
+        <p>Silahkan Login terlebih dahulu</p>
+    </div>
 
     <div class="card p-4 shadow-lg" style="width: 350px;">
         <h4 class="text-center mb-3">Login</h4>

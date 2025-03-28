@@ -27,7 +27,8 @@
                 <div>
                     <strong>{{ $item->judul_materi }}</strong><br>
                     <span>{{ $item->mata_pelajaran }}</span><br>
-                    <span>{{ $item->deskripsi }}</span>
+                    <span>{{ $item->deskripsi }}</span><br>
+                    <small class="text-muted">Ditambahkan oleh: {{ $item->user->name }}</small>
                 </div>
                 @if(auth()->user()->role === 'tendik')
                     <form action="{{ route('dashboard.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus materi ini?');">
