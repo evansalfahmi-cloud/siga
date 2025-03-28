@@ -16,16 +16,21 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
             'judul_materi' => 'required',
+            'mata_pelajaran' => 'required', // ✅ Tambahkan validasi mata pelajaran
             'deskripsi' => 'required'
         ]);
-
+    
+        // Simpan ke database
         Materi::create([
-            'judul_materi' => $request->judul_materi, // ✅ Sesuai dengan input form
-            'deskripsi' => $request->deskripsi
+            'judul_materi' => $request->judul_materi,
+            'mata_pelajaran' => $request->mata_pelajaran,
+            'deskripsi' => $request->deskripsi,
+            'user_id' => auth()->id(), // ✅ Simpan user yang menambahkan materi
         ]);
-
+    
         return redirect()->route('dashboard')->with('success', 'Materi berhasil ditambahkan.');
     }
 }
