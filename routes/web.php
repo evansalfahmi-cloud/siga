@@ -8,7 +8,7 @@ use App\Http\Middleware\TendikMiddleware;
 
 // Rute login & logout
 Route::get('/', function () {
-    return redirect()->route('login'); // Redirect ke login jika akses ke root
+return redirect()->route('login'); // Redirect ke login jika akses ke root
 });
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -17,10 +17,23 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Rute dashboard (hanya untuk pengguna yang login)
 Route::middleware([AuthMiddleware::class])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Rute menambah data hanya bisa diakses oleh tendik
-    Route::post('/dashboard/tambah', [DashboardController::class, 'store'])
+Route::post('/dashboard/tambah', [DashboardController::class, 'store'])
         ->name('dashboard.store')
         ->middleware(TendikMiddleware::class);
+
+
 });
+
+Route::middleware([AuthMiddleware::class])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Rute hanya untuk tendik
+    Route::middleware([TendikMiddleware::class])->group(function () {
+        Route::post('/dashboard/tambah', [DashboardController::class, 'store'])->name('dashboard.store');
+        Route::delete('/dashboard/hapus/{id}', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
+    });
+});
+

@@ -32,5 +32,21 @@ class DashboardController extends Controller
         ]);
     
         return redirect()->route('dashboard')->with('success', 'Materi berhasil ditambahkan.');
+        
     }
+
+    public function destroy($id)
+{
+    $materi = Materi::findOrFail($id);
+
+    // Pastikan hanya tendik yang bisa menghapus
+    if (auth()->user()->role !== 'tendik') {
+        return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki izin untuk menghapus materi.');
+    }
+
+    $materi->delete();
+
+    return redirect()->route('dashboard')->with('success', 'Materi berhasil dihapus.');
+}
+
 }
