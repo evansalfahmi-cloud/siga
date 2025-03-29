@@ -19,9 +19,9 @@
     @endif
 
     <!-- Daftar Materi Kejuruan -->
-    <h3 class="mt-4">Mata Pelajaran Kejuruan</h3>
+    <h3 class="mt-4">📌 Mata Pelajaran Kejuruan</h3>
     @foreach($kejuruan as $program)
-        <h5 class="mt-3">{{ $program->nama }}</h5>
+        <h4 class="mt-3">{{ $program->nama }}</h4>
         <ul class="list-group">
             @foreach($program->mata_pelajaran as $mapel)
                 @foreach($mapel->materi as $item)
@@ -46,7 +46,7 @@
     @endforeach
 
     <!-- Daftar Materi Umum -->
-    <h3 class="mt-4">Mata Pelajaran Umum</h3>
+    <h3 class="mt-4">📘 Mata Pelajaran Umum</h3>
     <ul class="list-group">
         @foreach($umum as $mapel)
             @foreach($mapel->materi as $item)
@@ -71,7 +71,7 @@
 
     <!-- Form Tambah Materi (Hanya untuk Tendik) -->
     @if(auth()->user()->role === 'tendik')
-        <h3 class="mt-4">Tambah Materi</h3>
+        <h3 class="mt-4">➕ Tambah Materi</h3>
         <form action="{{ route('dashboard.store') }}" method="POST">
             @csrf
             <div class="mb-3">
@@ -83,12 +83,13 @@
                 <select name="mata_pelajaran_id" class="form-control" required>
                     <option value="">Pilih Mata Pelajaran</option>
                     @foreach($kejuruan as $program)
-                        <optgroup label="📌 {{ $program->nama }}">
-                            @foreach($program->mata_pelajaran as $mapel)
-                                <option value="{{ $mapel->id }}">{{ $mapel->nama }}</option>
-                            @endforeach
-                        </optgroup>
-                    @endforeach
+    <optgroup label="📌 {{ $program->nama_keahlian }}"> <!-- Sesuaikan dengan nama field di database -->
+        @foreach($program->mataPelajaran as $mapel)
+            <option value="{{ $mapel->id }}">{{ $mapel->nama_pelajaran }}</option> <!-- Sesuaikan nama field -->
+        @endforeach
+    </optgroup>
+@endforeach
+
                     <optgroup label="📘 Mata Pelajaran Umum">
                         @foreach($umum as $mapel)
                             <option value="{{ $mapel->id }}">{{ $mapel->nama }}</option>

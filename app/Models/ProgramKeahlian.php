@@ -10,10 +10,14 @@ class ProgramKeahlian extends Model
     use HasFactory;
 
     protected $table = 'program_keahlian';
-    protected $fillable = ['nama_keahlian'];
+
+    public function mata_pelajaran()
+    {
+        return $this->hasMany(MataPelajaran::class, 'program_keahlian_id', 'id');
+    }
 
     public function mataPelajaran()
-    {
-        return $this->hasMany(MataPelajaran::class, 'program_keahlian_id');
-    }
+{
+    return $this->hasMany(MataPelajaran::class, 'program_keahlian_id');
+}
 }

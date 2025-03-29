@@ -12,8 +12,13 @@ class MataPelajaran extends Model
     protected $table = 'mata_pelajaran';
     protected $fillable = ['nama_pelajaran', 'kategori', 'program_keahlian_id'];
 
-    public function programKeahlian()
+    public function program_keahlian()
     {
         return $this->belongsTo(ProgramKeahlian::class, 'program_keahlian_id');
+    }
+
+    public function materi()
+    {
+        return $this->hasMany(Materi::class, 'mata_pelajaran_id');
     }
 }

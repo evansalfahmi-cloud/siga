@@ -13,8 +13,8 @@ class Materi extends Model
 
     protected $fillable = [
         'judul_materi',
-        'mata_pelajaran',
-        'deskripsi',
+        'mata_pelajaran_id', // Harus sesuai dengan nama kolom di database
+        'content', // Sesuai dengan perubahan migrasi
         'user_id',
     ];
 
@@ -23,4 +23,9 @@ class Materi extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function mata_pelajaran()
+        {
+            return $this->belongsTo(MataPelajaran::class, 'mata_pelajaran_id');
+        }
 }

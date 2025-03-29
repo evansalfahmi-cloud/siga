@@ -15,18 +15,19 @@ class DashboardController extends Controller
         // Ambil data program keahlian beserta mata pelajaran dan materinya
         $kejuruan = ProgramKeahlian::with(['mata_pelajaran.materi'])->get();
 
-        // Ambil mata pelajaran umum beserta materinya
-        $umum = MataPelajaran::where('kategori', 'umum')->with('materi')->get();
+
+        // Ambil mata pelajaran umum beserta materinya (Pastikan kategori sesuai dengan migration)
+        $umum = MataPelajaran::where('kategori', 'Umum')->with('materi')->get();
 
         return view('dashboard', compact('kejuruan', 'umum'));
     }
 
     public function store(Request $request)
     {
-        // Validasi input
+        // Validasi input dengan batas panjang maksimal
         $request->validate([
-            'judul_materi' => 'required',
-            'mata_pelajaran_id' => 'required|exists:mata_pelajaran,id', // Sesuaikan dengan tabel
+            'judul_materi' => 'required|max:255',
+            'mata_pelajaran_id' => 'required|exists:mata_pelajaran,id',
             'content' => 'required'
         ]);
     
