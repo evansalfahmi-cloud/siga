@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    @vite(['resources/js/app.js'])
-    @vite(['resources/css/app.css'])
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 <body class="container mt-5">
     <h1 class="text-primary">Dashboard</h1>
@@ -19,25 +18,54 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
-    <!-- Daftar Materi -->
-    <h3 class="mt-4">Daftar Materi</h3>
+    <!-- Daftar Materi Kejuruan -->
+    <h3 class="mt-4">Mata Pelajaran Kejuruan</h3>
+    @foreach($kejuruan as $program)
+        <h5 class="mt-3">{{ $program->nama }}</h5>
+        <ul class="list-group">
+            @foreach($program->mata_pelajaran as $mapel)
+                @foreach($mapel->materi as $item)
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>{{ $item->judul_materi }}</strong><br>
+                            <span class="text-muted">{{ $mapel->nama }}</span><br>
+                            <p>{{ $item->content }}</p>
+                            <small class="text-muted">Ditambahkan oleh: {{ $item->user->name }}</small>
+                        </div>
+                        @if(auth()->user()->role === 'tendik')
+                            <form action="{{ route('dashboard.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus materi ini?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                            </form>
+                        @endif
+                    </li>
+                @endforeach
+            @endforeach
+        </ul>
+    @endforeach
+
+    <!-- Daftar Materi Umum -->
+    <h3 class="mt-4">Mata Pelajaran Umum</h3>
     <ul class="list-group">
-        @foreach($materi as $item)
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                    <strong>{{ $item->judul_materi }}</strong><br>
-                    <span>{{ $item->mata_pelajaran }}</span><br>
-                    <span>{{ $item->deskripsi }}</span><br>
-                    <small class="text-muted">Ditambahkan oleh: {{ $item->user->name }}</small>
-                </div>
-                @if(auth()->user()->role === 'tendik')
-                    <form action="{{ route('dashboard.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus materi ini?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                    </form>
-                @endif
-            </li>
+        @foreach($umum as $mapel)
+            @foreach($mapel->materi as $item)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ $item->judul_materi }}</strong><br>
+                        <span class="text-muted">{{ $mapel->nama }}</span><br>
+                        <p>{{ $item->content }}</p>
+                        <small class="text-muted">Ditambahkan oleh: {{ $item->user->name }}</small>
+                    </div>
+                    @if(auth()->user()->role === 'tendik')
+                        <form action="{{ route('dashboard.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus materi ini?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    @endif
+                </li>
+            @endforeach
         @endforeach
     </ul>
 
@@ -52,11 +80,25 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Mata Pelajaran</label>
-                <input type="text" name="mata_pelajaran" class="form-control" required>
+                <select name="mata_pelajaran_id" class="form-control" required>
+                    <option value="">Pilih Mata Pelajaran</option>
+                    @foreach($kejuruan as $program)
+                        <optgroup label="📌 {{ $program->nama }}">
+                            @foreach($program->mata_pelajaran as $mapel)
+                                <option value="{{ $mapel->id }}">{{ $mapel->nama }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach
+                    <optgroup label="📘 Mata Pelajaran Umum">
+                        @foreach($umum as $mapel)
+                            <option value="{{ $mapel->id }}">{{ $mapel->nama }}</option>
+                        @endforeach
+                    </optgroup>
+                </select>
             </div>
             <div class="mb-3">
-                <label class="form-label">Deskripsi</label>
-                <textarea name="deskripsi" class="form-control" rows="3" required></textarea>
+                <label class="form-label">Isi Materi</label>
+                <textarea name="content" class="form-control" rows="4" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Tambah</button>
         </form>
