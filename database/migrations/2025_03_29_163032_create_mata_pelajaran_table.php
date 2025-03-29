@@ -9,13 +9,10 @@ return new class extends Migration {
     {
         Schema::create('mata_pelajaran', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_pelajaran');
-            $table->enum('kategori', ['kejuruan', 'umum']);
-            $table->unsignedBigInteger('program_keahlian_id')->nullable();
+            $table->string('nama_pelajaran')->unique(); // Nama mata pelajaran harus unik
+            $table->enum('kategori', ['Kejuruan', 'Umum']); // Gunakan huruf besar agar lebih rapi
+            $table->foreignId('program_keahlian_id')->nullable()->constrained('program_keahlian')->onDelete('cascade'); // Hubungkan dengan program_keahlian
             $table->timestamps();
-
-            // Foreign key untuk mata pelajaran kejuruan
-            $table->foreign('program_keahlian_id')->references('id')->on('program_keahlian')->onDelete('cascade');
         });
     }
 

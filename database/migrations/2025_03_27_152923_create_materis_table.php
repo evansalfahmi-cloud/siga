@@ -10,9 +10,9 @@ return new class extends Migration {
         Schema::create('materi', function (Blueprint $table) {
             $table->id();
             $table->string('judul_materi');
-            $table->string('mata_pelajaran');
             $table->text('deskripsi');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Menghubungkan ke tabel users
+            $table->foreignId('mata_pelajaran_id')->constrained('mata_pelajaran')->onDelete('cascade'); // Relasi ke tabel mata_pelajaran
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Relasi ke users
             $table->timestamps();
         });
     }
