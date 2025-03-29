@@ -17,6 +17,7 @@
     @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
+            <button type="submit" class="btn bt
 
     <!-- Daftar Materi Kejuruan -->
     <h3 class="mt-4">📌 Mata Pelajaran Kejuruan</h3>
@@ -69,8 +70,8 @@
         @endforeach
     </ul>
 
-    <!-- Form Tambah Materi (Hanya untuk Tendik) -->
-    @if(auth()->user()->role === 'tendik')
+   <!-- Form Tambah Materi (Hanya untuk Tendik) -->
+   @if(auth()->user()->role === 'tendik')
         <h3 class="mt-4">➕ Tambah Materi</h3>
         <form action="{{ route('dashboard.store') }}" method="POST">
             @csrf
@@ -83,16 +84,15 @@
                 <select name="mata_pelajaran_id" class="form-control" required>
                     <option value="">Pilih Mata Pelajaran</option>
                     @foreach($kejuruan as $program)
-    <optgroup label="📌 {{ $program->nama_keahlian }}"> <!-- Sesuaikan dengan nama field di database -->
-        @foreach($program->mataPelajaran as $mapel)
-            <option value="{{ $mapel->id }}">{{ $mapel->nama_pelajaran }}</option> <!-- Sesuaikan nama field -->
-        @endforeach
-    </optgroup>
-@endforeach
-
+                        <optgroup label="📌 {{ $program->nama_keahlian }}">
+                            @foreach($program->mataPelajaran as $mapel)
+                                <option value="{{ $mapel->id }}">{{ $mapel->nama_pelajaran }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach
                     <optgroup label="📘 Mata Pelajaran Umum">
                         @foreach($umum as $mapel)
-                            <option value="{{ $mapel->id }}">{{ $mapel->nama }}</option>
+                            <option value="{{ $mapel->id }}">{{ $mapel->nama_pelajaran }}</option>
                         @endforeach
                     </optgroup>
                 </select>
@@ -100,8 +100,7 @@
             <div class="mb-3">
                 <label class="form-label">Isi Materi</label>
                 <textarea name="content" class="form-control" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>n-primary">Tambah</button>
         </form>
     @endif
 

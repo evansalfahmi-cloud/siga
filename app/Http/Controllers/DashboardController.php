@@ -15,9 +15,13 @@ class DashboardController extends Controller
         // Ambil data program keahlian beserta mata pelajaran dan materinya
         $kejuruan = ProgramKeahlian::with(['mata_pelajaran.materi'])->get();
 
+        // Ambil mata pelajaran umum beserta materinya
+        $umum = MataPelajaran::where('kategori', 'umum')->with('materi')->get();
 
-        // Ambil mata pelajaran umum beserta materinya (Pastikan kategori sesuai dengan migration)
-        $umum = MataPelajaran::where('kategori', 'Umum')->with('materi')->get();
+        // Debugging: Periksa apakah data benar-benar ada
+        if ($umum->isEmpty()) {
+            return redirect()->route('dashboard')->with('error', 'Tidak ada mata pelajaran umum yang ditemukan.');
+        }
 
         return view('dashboard', compact('kejuruan', 'umum'));
     }
@@ -30,15 +34,15 @@ class DashboardController extends Controller
             'mata_pelajaran_id' => 'required|exists:mata_pelajaran,id',
             'content' => 'required'
         ]);
-    
+
         // Simpan ke database
         Materi::create([
             'judul_materi' => $request->judul_materi,
             'mata_pelajaran_id' => $request->mata_pelajaran_id,
             'content' => $request->content,
-            'user_id' => auth()->id(), // Simpan user yang menambahkan materi
+            'user_id' => auth()->id(),
         ]);
-    
+
         return redirect()->route('dashboard')->with('success', 'Materi berhasil ditambahkan.');
     }
 

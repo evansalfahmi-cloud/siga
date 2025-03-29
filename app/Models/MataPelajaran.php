@@ -21,4 +21,8 @@ class MataPelajaran extends Model
     {
         return $this->hasMany(Materi::class, 'mata_pelajaran_id');
     }
+
+    
 }
+
+
