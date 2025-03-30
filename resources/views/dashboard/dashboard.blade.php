@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
-</head>
-<body class="container mt-5">
-    <x-navbar />
-
+<x-layout title="Dashboard">
     <h1 class="text-success text-center mb-4">Dashboard</h1> <!-- Warna Hijau -->
     <div class="alert alert-success text-center">Selamat datang, {{ auth()->user()->name }} ({{ auth()->user()->role }})</div>
 
@@ -121,5 +111,4 @@
         @csrf
         <button type="submit" class="btn btn-danger">Logout</button>
     </form>
-</body>
-</html>
+</x-layout>

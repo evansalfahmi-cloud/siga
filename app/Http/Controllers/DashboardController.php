@@ -20,10 +20,10 @@ class DashboardController extends Controller
 
         // Debugging: Periksa apakah data benar-benar ada
         if ($umum->isEmpty()) {
-            return redirect()->route('dashboard')->with('error', 'Tidak ada mata pelajaran umum yang ditemukan.');
+            return redirect()->route('dashboard.index')->with('error', 'Tidak ada mata pelajaran umum yang ditemukan.');
         }
 
-        return view('dashboard', compact('kejuruan', 'umum'));
+        return view('dashboard.dashboard', compact('kejuruan', 'umum'));
     }
 
     public function store(Request $request)
@@ -43,7 +43,7 @@ class DashboardController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Materi berhasil ditambahkan.');
+        return redirect()->route('dashboard.index')->with('success', 'Materi berhasil ditambahkan.');
     }
 
     public function destroy($id)
@@ -52,11 +52,11 @@ class DashboardController extends Controller
 
         // Pastikan hanya tendik yang bisa menghapus
         if (auth()->user()->role !== 'tendik') {
-            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki izin untuk menghapus materi.');
+            return redirect()->route('dashboard.index')->with('error', 'Anda tidak memiliki izin untuk menghapus materi.');
         }
 
         $materi->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Materi berhasil dihapus.');
+        return redirect()->route('dashboard.index')->with('success', 'Materi berhasil dihapus.');
     }
 }
