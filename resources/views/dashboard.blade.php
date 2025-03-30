@@ -7,6 +7,8 @@
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 <body class="container mt-5">
+    <x-navbar />
+
     <h1 class="text-success text-center mb-4">Dashboard</h1> <!-- Warna Hijau -->
     <div class="alert alert-success text-center">Selamat datang, {{ auth()->user()->name }} ({{ auth()->user()->role }})</div>
 
