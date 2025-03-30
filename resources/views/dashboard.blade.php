@@ -7,8 +7,8 @@
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 <body class="container mt-5">
-    <h1 class="text-primary">Dashboard</h1>
-    <p>Selamat datang, {{ auth()->user()->name }} ({{ auth()->user()->role }})</p>
+    <h1 class="text-primary text-center mb-4">Dashboard</h1>
+    <div class="alert alert-info text-center">Selamat datang, {{ auth()->user()->name }} ({{ auth()->user()->role }})</div>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -17,20 +17,19 @@
     @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
-            <button type="submit" class="btn bt
 
     <!-- Daftar Materi Kejuruan -->
     <h3 class="mt-4">📌 Mata Pelajaran Kejuruan</h3>
     @foreach($kejuruan as $program)
-        <h4 class="mt-3">{{ $program->nama }}</h4>
-        <ul class="list-group">
+        <h4 class="mt-3 text-secondary">{{ $program->nama }}</h4>
+        <ul class="list-group mb-3">
             @foreach($program->mata_pelajaran as $mapel)
                 @foreach($mapel->materi as $item)
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
                             <strong>{{ $item->judul_materi }}</strong><br>
-                            <span class="text-muted">{{ $mapel->nama }}</span><br>
-                            <p>{{ $item->content }}</p>
+                            <span class="text-muted">{{ $mapel->nama }}</span>
+                            <p class="mb-1">{{ $item->content }}</p>
                             <small class="text-muted">Ditambahkan oleh: {{ $item->user->name }}</small>
                         </div>
                         @if(auth()->user()->role === 'tendik')
@@ -54,8 +53,8 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
                         <strong>{{ $item->judul_materi }}</strong><br>
-                        <span class="text-muted">{{ $mapel->nama }}</span><br>
-                        <p>{{ $item->content }}</p>
+                        <span class="text-muted">{{ $mapel->nama }}</span>
+                        <p class="mb-1">{{ $item->content }}</p>
                         <small class="text-muted">Ditambahkan oleh: {{ $item->user->name }}</small>
                     </div>
                     @if(auth()->user()->role === 'tendik')
@@ -70,10 +69,10 @@
         @endforeach
     </ul>
 
-   <!-- Form Tambah Materi (Hanya untuk Tendik) -->
-   @if(auth()->user()->role === 'tendik')
+    <!-- Form Tambah Materi (Hanya untuk Tendik) -->
+    @if(auth()->user()->role === 'tendik')
         <h3 class="mt-4">➕ Tambah Materi</h3>
-        <form action="{{ route('dashboard.store') }}" method="POST">
+        <form action="{{ route('dashboard.store') }}" method="POST" class="card p-3 shadow-sm">
             @csrf
             <div class="mb-3">
                 <label class="form-label">Judul Materi</label>
@@ -100,12 +99,13 @@
             <div class="mb-3">
                 <label class="form-label">Isi Materi</label>
                 <textarea name="content" class="form-control" rows="4" required></textarea>
-            </div>n-primary">Tambah</button>
+            </div>
+            <button type="submit" class="btn btn-primary">Tambah</button>
         </form>
     @endif
 
     <!-- Logout -->
-    <form action="{{ route('logout') }}" method="POST" class="mt-4">
+    <form action="{{ route('logout') }}" method="POST" class="mt-4 text-center">
         @csrf
         <button type="submit" class="btn btn-danger">Logout</button>
     </form>
