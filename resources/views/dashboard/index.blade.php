@@ -1,4 +1,5 @@
 <x-layout title="Dashboard">
+
     <h1 class="text-success text-center mb-4">Dashboard</h1> <!-- Warna Hijau -->
     <div class="alert alert-success text-center">Selamat datang, {{ auth()->user()->name }} ({{ auth()->user()->role }})</div>
 

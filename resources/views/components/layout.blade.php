@@ -8,9 +8,11 @@
     
 </head>
 <body class="container mt-5">
+    <x-navbar /> <!-- Tambahkan Navbar di sini -->
+    
     <div class="content">
         {{ $slot }}
     </div>
-
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 </body>
 </html>
