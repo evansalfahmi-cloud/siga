@@ -1,8 +1,6 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+
 @import 'tailwindcss';
-/* resources/css/app.css */
-@import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
