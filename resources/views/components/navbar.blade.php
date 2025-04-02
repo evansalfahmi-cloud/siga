@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top py-1">
+    <div class="container-sm">
         <a class="navbar-brand" href="{{ route('dashboard') }}">SIGA</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
