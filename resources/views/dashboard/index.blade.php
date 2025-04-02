@@ -71,8 +71,8 @@
             @endif
         @endforeach
     </ul>
-
-    <!-- Form Tambah Materi (Hanya untuk Tendik) -->
+    
+    <!-- Form Tambah Materi (Hanya untuk Tendik) 
     @if(auth()->user()->role === 'tendik')
         <h3 class="mt-4 text-success">➕ Tambah Materi</h3>
         <form action="{{ route('dashboard.store') }}" method="POST" class="card p-3 shadow-sm">
@@ -107,6 +107,7 @@
         </form>
     @endif
 
+-->
     <!-- Logout -->
     <form action="{{ route('logout') }}" method="POST" class="mt-4 text-center">
         @csrf

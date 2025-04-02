@@ -18,7 +18,7 @@
                 <!-- Show "Tambah" menu only for Tendik users -->
                 @if(Auth::check() && Auth::user()->role === 'tendik')
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tambah</a>
+                        <a class="nav-link" href="{{ route('dashboard.create') }}">Tambah</a>
                     </li>
                 @endif
             </ul>
