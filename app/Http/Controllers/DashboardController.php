@@ -59,4 +59,14 @@ class DashboardController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Materi berhasil dihapus.');
     }
+
+    public function create()
+{
+    // Ambil data mata pelajaran untuk dropdown
+    $kejuruan = ProgramKeahlian::with('mata_pelajaran')->get();
+    $umum = MataPelajaran::where('kategori', 'umum')->get();
+
+    return view('dashboard.tambah', compact('kejuruan', 'umum'));
+}
+
 }
