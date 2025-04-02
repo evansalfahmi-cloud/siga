@@ -13,7 +13,7 @@
             <select name="mata_pelajaran_id" class="form-control" required>
                 <option value="">Pilih Mata Pelajaran</option>
                 @foreach($kejuruan as $program)
-                    <optgroup label="📌 {{ $program->nama }}">
+                    <optgroup label="📌 {{ $program->nama_keahlian }}">
                         @foreach($program->mata_pelajaran as $mapel)
                             <option value="{{ $mapel->id }}">{{ $mapel->nama_pelajaran }}</option>
                         @endforeach
