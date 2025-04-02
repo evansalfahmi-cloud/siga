@@ -30,7 +30,6 @@ Route::post('/dashboard/tambah', [DashboardController::class, 'store'])
 Route::middleware([AuthMiddleware::class])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Rute hanya untuk tendik
     Route::middleware([TendikMiddleware::class])->group(function () {
         Route::post('/dashboard/tambah', [DashboardController::class, 'store'])->name('dashboard.store');
         Route::delete('/dashboard/hapus/{id}', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
