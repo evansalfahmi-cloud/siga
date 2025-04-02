@@ -37,3 +37,6 @@ Route::middleware([AuthMiddleware::class])->group(function () {
     });
 });
 
+Route::get('/dashboard/tambah', [DashboardController::class, 'create'])->name('dashboard.create');
+Route::post('/dashboard', [DashboardController::class, 'store'])->name('dashboard.store');
+
