@@ -71,46 +71,5 @@
             @endif
         @endforeach
     </ul>
-    
-    <!-- Form Tambah Materi (Hanya untuk Tendik) 
-    @if(auth()->user()->role === 'tendik')
-        <h3 class="mt-4 text-success">➕ Tambah Materi</h3>
-        <form action="{{ route('dashboard.store') }}" method="POST" class="card p-3 shadow-sm">
-            @csrf
-            <div class="mb-3">
-                <label class="form-label">Judul Materi</label>
-                <input type="text" name="judul_materi" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Mata Pelajaran</label>
-                <select name="mata_pelajaran_id" class="form-control" required>
-                    <option value="">Pilih Mata Pelajaran</option>
-                    @foreach($kejuruan as $program)
-                        <optgroup label="📌 {{ $program->nama_keahlian }}">
-                            @foreach($program->mataPelajaran as $mapel)
-                                <option value="{{ $mapel->id }}">{{ $mapel->nama_pelajaran }}</option>
-                            @endforeach
-                        </optgroup>
-                    @endforeach
-                    <optgroup label="📘 Mata Pelajaran Umum">
-                        @foreach($umum as $mapel)
-                            <option value="{{ $mapel->id }}">{{ $mapel->nama_pelajaran }}</option>
-                        @endforeach
-                    </optgroup>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Isi Materi</label>
-                <textarea name="content" class="form-control" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-success">Tambah</button>
-        </form>
-    @endif
 
--->
-    <!-- 
-    <form action="{{ route('logout') }}" method="POST" class="mt-4 text-center">
-        @csrf
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
 </x-layout> 

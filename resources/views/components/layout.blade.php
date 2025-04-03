@@ -17,6 +17,8 @@
     </main>
 </div>]
     @vite(['resources/js/app.js']) <!-- Load JavaScript -->
+    <x-footer />
+
     
 </body>
 </html>
