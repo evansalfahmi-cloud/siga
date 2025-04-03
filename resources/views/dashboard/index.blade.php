@@ -108,9 +108,9 @@
     @endif
 
 -->
-    <!-- Logout -->
+    <!-- 
     <form action="{{ route('logout') }}" method="POST" class="mt-4 text-center">
         @csrf
         <button type="submit" class="btn btn-danger">Logout</button>
     </form>
-</x-layout>
+</x-layout> 
