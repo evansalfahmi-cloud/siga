@@ -14,7 +14,7 @@
     <!-- Daftar Materi Kejuruan -->
     <h3 class="mt-4 text-success">📌 Mata Pelajaran Kejuruan</h3>
     @foreach($kejuruan as $program)
-        <h4 class="mt-3 text-dark">{{ $program->nama }}</h4>
+        <h4 class="mt-3 text-dark">{{ $program->nama_keahlian }}</h4>
         <ul class="list-group mb-3">
             @foreach($program->mata_pelajaran as $mapel)
                 <h5 class="text-success mt-2">{{ $mapel->nama_pelajaran }}</h5> <!-- Warna Hijau -->
